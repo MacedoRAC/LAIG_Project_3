@@ -4,6 +4,8 @@
 #include "CGFinterface.h"
 #include "Camera.h"
 #include "Graph.h"
+#include "StateOfGame.h"
+#include "ANFScene.h"
 
 class GUI: public CGFinterface{
 public:
@@ -11,6 +13,8 @@ public:
 	vector<string>cameras;
 	int wind;
 	GLUI_Spinner * windSpinner;
+	string fileToLoad, difficulty, modeOfGame;
+	StateOfGame* game;
 
 	GUI(Graph* graph);
 	virtual void initGUI();
@@ -18,7 +22,8 @@ public:
 
 	virtual void processMouse(int button, int state, int x, int y);	
 	void performPicking(int x, int y);
-	void processHits(GLint hits, GLuint buffer[]); 
+	void processHits(GLint hits, GLuint buffer[]);
+	void startGame();
 };
 
 #endif

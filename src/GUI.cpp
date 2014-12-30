@@ -13,6 +13,11 @@ GUI:: GUI(Graph* graph){
 	for(it=graph->cameras.begin(); it!=graph->cameras.end(); it++){
 		cameras.push_back((*it).second->id);
 	}
+
+	this->fileToLoad = "classic.xml";
+	this->difficulty = "medium";
+	this->modeOfGame = "pvp";
+	this->game = NULL;
 }
 
 
@@ -164,17 +169,63 @@ void GUI::processHits (GLint hits, GLuint buffer[])
 		for (int j=0; j < num; j++) 
 			ptr++;
 	}
-	
+
 	// if there were hits, the one selected is in "selected", and it consist of nselected "names" (integer ID's)
 	if (selected!=NULL)
 	{
-		// this should be replaced by code handling the picked object's ID's (stored in "selected"), 
+		/*// this should be replaced by code handling the picked object's ID's (stored in "selected"), 
 		// possibly invoking a method on the scene class and passing "selected" and "nselected"
 		printf("Picked ID's: ");
 		for (int i=0; i<nselected; i++)
-			printf("%d ",selected[i]);
-		printf("\n");
-	}
-	else
-		printf("Nothing selected while picking \n");	
+		printf("%d ",selected[i]);
+		printf("\n");*/
+
+		//Menu
+		if(graph->rootId == "menuRoot"){
+			// Ambient
+			if(selected[0] == -1) {
+				if(selected[1] == 1)
+					fileToLoad = "classic.xml";
+				else if(selected[1] == 2)
+					fileToLoad = "modern.xml";
+				else
+					fileToLoad = "garden.xml";
+			}else if(selected[0] == -2){//difficulty
+				if(selected[1] == 1)
+					difficulty = "easy";
+				else if(selected[1] == 2)
+					difficulty = "medium";
+				else
+					difficulty = "hard";
+			}else if(selected[0] == -3){//type of game
+				if(selected[1] == 1)
+					modeOfGame = "pvp";
+				else if(selected[1] == 2)
+					modeOfGame = "pvc";
+				else
+					modeOfGame = "cvc";
+			}else if(selected[0] == -4){//play and exit
+				if(selected[1] == 1)
+					startGame();
+				else{
+					printf("\nExiting...\n");
+					exit(-1);
+				}
+			}
+		}else{
+
+		}
+	}else
+		printf("Nothing selected while picking \n");
+
+}
+
+
+
+void GUI::startGame(){
+	Graph * pgraph = new Graph();
+	ANFScene anf = ANFScene(fileToLoad, pgraph);
+	this->graph = pgraph;
+
+	game = new StateOfGame(graph, difficulty, modeOfGame);
 }

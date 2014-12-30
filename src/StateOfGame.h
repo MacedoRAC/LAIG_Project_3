@@ -3,6 +3,7 @@
 
 #include<vector>
 #include<string>
+#include "Graph.h"
 
 using namespace std;
 
@@ -29,10 +30,12 @@ class StateOfGame{
 public:
 	vector<Piece> whitePieces, redPieces;
 	vector<Fence> fences;
-	string winner;
+	string winner, difficulty, modeOfGame;
+	Graph* graph;
 
 
 	StateOfGame();
+	StateOfGame(Graph* graph, string difficulty, string modeOfGame);
 	~StateOfGame(){};
 	void prologParser(string state);
 	StateOfGame & operator=(const StateOfGame & state); 
