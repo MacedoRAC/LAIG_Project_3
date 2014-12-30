@@ -1,0 +1,237 @@
+<anf>
+    <globals>
+        <drawing mode="fill" shading="gouraud" background="0 0 0 0.6" />
+        <culling face="back" order="cw" />
+        <lighting doublesided="false" local="false" enabled="true" ambient="0.8 0.8 0.8 0.8" />
+    </globals>
+
+    <cameras initial="menuCam" >
+        <perspective id="menuCam" near="0" far="10" angle="0" pos="5 5 -1" target="5 5 0" />
+    </cameras>
+
+    <lights>
+        <light id="menuLight" type="omni" enabled="true" marker="true" pos="0 100 0" >
+            <component type="ambient" value="1 1 1 1" />
+            <component type="diffuse" value="1 1 1 1" />
+            <component type="specular" value="1 1 1 1" />
+        </light>
+    </lights>
+
+    <textures>
+        <texture id="menuText" file="img/menu.jpg" texlength_s="6" texlength_t="5" />
+    </textures>
+
+    <appearances>
+        <appearance id="menuApp" shininess="20" textureref="menuText">
+            <component type="ambient" value="1 1 1 1" />
+            <component type="diffuse" value="1 1 1 1" />
+            <component type="specular" value="1 1 1 1" />
+        </appearance>
+
+        <appearance id="menu_noText" shininess="20" >
+            <component type="ambient" value="1 1 1 1" />
+            <component type="diffuse" value="1 1 1 1" />
+            <component type="specular" value="1 1 1 1" />        
+        </appearance>
+    </appearances>
+
+    <animations>
+    	
+    </animations>
+
+    <graph rootid="menuRoot">
+        <node id="menuRoot">
+            <transforms>
+                <transform type="translate" to="5 5 0" />
+            </transforms>
+
+            <appearanceref id="menu_noText" />
+
+            <primitives>
+            </primitives>
+
+            <descendants>
+                <noderef id="menuBase" />
+                <noderef id="classic" />
+                <noderef id="modern" />
+                <noderef id="garden" />
+                <noderef id="easy" />
+                <noderef id="medium" />
+                <noderef id="hard" />
+                <noderef id="PvP" />
+                <noderef id="PvC" />
+                <noderef id="CvC" />
+                <noderef id="play" />
+                <noderef id="exit" />
+            </descendants>
+        </node>
+
+        <node id="menuBase">
+            <transforms>
+            </transforms>
+
+            <appearanceref id="menuApp" />
+
+            <primitives>
+                <rectangle xy1="6 5" xy2="0 0" />
+            </primitives>
+
+            <descendants>
+            </descendants>
+        </node>
+
+        <node id="classic" transparency="true">
+            <transforms>
+            </transforms>
+
+            <appearanceref id="menu_noText" />
+
+            <primitives>
+                <rectangle xy1="3.70 2.56" xy2="4.56 3" />
+            </primitives>
+
+            <descendants>
+            </descendants>
+        </node>
+
+        <node id="modern" transparency="true">
+            <transforms>
+            </transforms>
+
+            <appearanceref id="menu_noText" />
+
+            <primitives>
+                <rectangle xy1="2.56 2.56" xy2="3.52 3" />
+            </primitives>
+
+            <descendants>
+            </descendants>
+        </node>
+
+        <node id="garden" transparency="true">
+            <transforms>
+            </transforms>
+
+            <appearanceref id="menu_noText" />
+
+            <primitives>
+                <rectangle xy1="1.28 2.56" xy2="2.14 3" />
+            </primitives>
+
+            <descendants>
+            </descendants>
+        </node>
+
+        <node id="easy" transparency="true">
+            <transforms>
+            </transforms>
+
+            <appearanceref id="menu_noText" />
+
+            <primitives>
+                <rectangle xy1="3.84 1.70" xy2="4.42 2" />
+            </primitives>
+
+            <descendants>
+            </descendants>
+        </node>
+
+        <node id="medium" transparency="true">
+            <transforms>
+            </transforms>
+
+            <appearanceref id="menu_noText" />
+
+            <primitives>
+                <rectangle xy1="2.56 1.70" xy2="3.42 2" />
+            </primitives>
+
+            <descendants>
+            </descendants>
+        </node>
+
+        <node id="hard" transparency="true">
+            <transforms>
+            </transforms>
+
+            <appearanceref id="menu_noText" />
+
+            <primitives>
+                <rectangle xy1="1.42 1.70" xy2="2.14 2" />
+            </primitives>
+
+            <descendants>
+            </descendants>
+        </node>
+
+        <node id="PvP" transparency="true">
+            <transforms>
+            </transforms>
+
+            <appearanceref id="menu_noText" />
+
+            <primitives>
+                <rectangle xy1="3.56 0.84" xy2="4.28 1.14" />
+            </primitives>
+
+            <descendants>
+            </descendants>
+        </node>
+
+        <node id="PvC" transparency="true">
+            <transforms>
+            </transforms>
+
+            <appearanceref id="menu_noText" />
+
+            <primitives>
+                <rectangle xy1="2.56 0.84" xy2="3.28 1.14" />
+            </primitives>
+
+            <descendants>
+            </descendants>
+        </node>
+
+        <node id="CvC" transparency="true">
+            <transforms>
+            </transforms>
+
+            <appearanceref id="menu_noText" />
+
+            <primitives>
+                <rectangle xy1="1.70 0.84" xy2="2.28 1.14" />
+            </primitives>
+
+            <descendants>
+            </descendants>
+        </node>
+
+        <node id="play" transparency="true">
+            <transforms>
+            </transforms>
+
+            <appearanceref id="menu_noText" />
+
+            <primitives>
+                <rectangle xy1="3.28 0.20" xy2="3.98 0.42" />
+            </primitives>
+
+            <descendants>
+            </descendants>
+        </node>
+
+        <node id="exit" transparency="true">
+            <transforms>
+            </transforms>
+
+            <appearanceref id="menu_noText" />
+
+            <primitives>
+                <rectangle xy1="2.56 0.42" xy2="1.98 0.20" />
+            </primitives>
+
+            <descendants>
+            </descendants>
+        </node>
+    </graph>
+</anf>
