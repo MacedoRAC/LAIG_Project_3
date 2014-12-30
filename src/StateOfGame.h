@@ -30,12 +30,14 @@ class StateOfGame{
 public:
 	vector<Piece> whitePieces, redPieces;
 	vector<Fence> fences;
-	string winner, difficulty, modeOfGame;
+	char* winner;
+	char* difficulty;
+	char* modeOfGame;
 	Graph* graph;
 
 
 	StateOfGame();
-	StateOfGame(Graph* graph, string difficulty, string modeOfGame);
+	StateOfGame(Graph* graph, char* difficulty, char* modeOfGame);
 	~StateOfGame(){};
 	void prologParser(string state);
 	StateOfGame & operator=(const StateOfGame & state); 

@@ -14,9 +14,9 @@ GUI:: GUI(Graph* graph){
 		cameras.push_back((*it).second->id);
 	}
 
-	this->fileToLoad = "classic.xml";
-	this->difficulty = "medium";
-	this->modeOfGame = "pvp";
+	fileToLoad = (char*)"classic.xml";
+	difficulty = (char*)"medium";
+	modeOfGame = (char*)"pvp";
 	this->game = NULL;
 }
 
@@ -185,25 +185,25 @@ void GUI::processHits (GLint hits, GLuint buffer[])
 			// Ambient
 			if(selected[0] == -1) {
 				if(selected[1] == 1)
-					fileToLoad = "classic.xml";
+					fileToLoad = (char*)"classic.xml";
 				else if(selected[1] == 2)
-					fileToLoad = "modern.xml";
+					fileToLoad = (char*)"modern.xml";
 				else
-					fileToLoad = "garden.xml";
+					fileToLoad = (char*)"garden.xml";
 			}else if(selected[0] == -2){//difficulty
 				if(selected[1] == 1)
-					difficulty = "easy";
+					difficulty = (char*)"easy";
 				else if(selected[1] == 2)
-					difficulty = "medium";
+					difficulty = (char*)"medium";
 				else
-					difficulty = "hard";
+					difficulty = (char*)"hard";
 			}else if(selected[0] == -3){//type of game
 				if(selected[1] == 1)
-					modeOfGame = "pvp";
+					modeOfGame = (char*)"pvp";
 				else if(selected[1] == 2)
-					modeOfGame = "pvc";
+					modeOfGame = (char*)"pvc";
 				else
-					modeOfGame = "cvc";
+					modeOfGame = (char*)"cvc";
 			}else if(selected[0] == -4){//play and exit
 				if(selected[1] == 1)
 					startGame();

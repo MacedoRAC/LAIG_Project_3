@@ -13,7 +13,9 @@ public:
 	vector<string>cameras;
 	int wind;
 	GLUI_Spinner * windSpinner;
-	string fileToLoad, difficulty, modeOfGame;
+	char* fileToLoad;
+	char* difficulty;
+	char* modeOfGame;
 	StateOfGame* game;
 
 	GUI(Graph* graph);

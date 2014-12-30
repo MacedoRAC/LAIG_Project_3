@@ -16,11 +16,11 @@ StateOfGame:: StateOfGame(){
 	this->winner="";
 }
 
-StateOfGame:: StateOfGame(Graph* graph, string difficulty, string modeOfGame){
+StateOfGame:: StateOfGame(Graph* graph, char* difficulty, char* modeOfGame){
 	this->graph=graph;
-	this->difficulty=difficulty;
-	this->modeOfGame=modeOfGame;
-	this->winner="";
+	difficulty=difficulty;
+	modeOfGame=modeOfGame;
+	winner="";
 }
 
 void StateOfGame::prologParser(string state){
