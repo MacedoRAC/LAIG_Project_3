@@ -56,13 +56,10 @@ void GUI::initGUI()
 	for(unsigned int i = 0; i < graph->lights.size();i++)
 	{
 		if (graph->lights[i].enabled)
-			addCheckboxToPanel(lightspanel,
-			(char*)graph->lights[i].id.c_str(), NULL, i)->set_int_val(
-			1);
+			addCheckboxToPanel(lightspanel, (char*)graph->lights[i].id.c_str(), NULL, i)->set_int_val(1);
 		else
 			addCheckboxToPanel(lightspanel,
-			(char*)graph->lights[i].id.c_str(), NULL, i)->set_int_val(
-			0);
+			(char*)graph->lights[i].id.c_str(), NULL, i)->set_int_val(0);
 	}
 	
 	addColumnToPanel(varPanel);
