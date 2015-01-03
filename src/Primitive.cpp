@@ -661,3 +661,52 @@ void Cube::draw(){
 void Cube:: draw(Texture* text){
 	glutSolidCube(1.0);
 }
+
+
+//PECAPRIM
+PecaPrim::PecaPrim():Primitive("peca"){
+	bot = Cylinder("cylinder", 2, 1.8, 1, 30, 2);
+	mid = Cylinder("cylinder", 0.8, 0.5, 2.3, 25, 4);
+	top = Cylinder("cylinder", 1.5, 1.5, 0.4, 30, 2);
+	cone = Cylinder("cylinder", 1.5, 0.1, 1.2, 30, 3);
+}
+
+void PecaPrim::draw(){
+	
+	bot.draw();
+
+	glPushMatrix();
+		glTranslatef(0, 0, 1);
+		mid.draw();
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslatef(0, 0, 3);
+		top.draw();
+	glPopMatrix();
+	
+	glPushMatrix();
+		glTranslatef(0, 0, 3.5);
+		cone.draw();
+	glPopMatrix();
+	
+}
+
+void PecaPrim::draw(Texture* text){
+
+	glPushMatrix();
+		glTranslatef(0, 0, 3.8);
+		cone.draw(text);
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslatef(0, 0, 3);
+		top.draw(text);
+	glPopMatrix();
+	
+	glPushMatrix();
+		glTranslatef(0, 0, 1.65);
+		mid.draw(text);
+	glPopMatrix();
+	bot.draw(text);
+}

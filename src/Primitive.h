@@ -47,6 +47,7 @@ public:
 	void draw();
 	void draw(Texture * text);
 	Cylinder(string type, float base, float top, float height, int slices, int stacks);
+	Cylinder(){};
 };
 
 class Torus : public Primitive{
@@ -140,6 +141,16 @@ public:
 };
 
 
+class PecaPrim: public Primitive{
+public:
+	Cylinder bot, mid, top, cone;
+
+	void draw();
+	void draw(Texture* text);
+	PecaPrim();
+
+	~PecaPrim(){};
+};
 
 
 #endif

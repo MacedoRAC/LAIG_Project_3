@@ -681,6 +681,15 @@ ANFScene::ANFScene(char *filename, Graph* graph)
 
 					primitivesDef = primitivesDef->NextSiblingElement("cube");
 				}
+				//Pecas
+				primitivesDef = primitives->FirstChildElement("peca");
+
+				while(primitivesDef){
+					node1.primitives.push_back(new PecaPrim());
+
+					primitivesDef = primitivesDef->NextSiblingElement("peca");
+				}
+
 				//Rectangles
 				primitivesDef = primitives->FirstChildElement("rectangle");	
 				
