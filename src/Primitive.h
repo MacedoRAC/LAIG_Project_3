@@ -138,18 +138,32 @@ public:
 	void draw();
 	void draw(Texture * text);
 	Cube(string type);
+	Cube(){};
 };
 
 
-class PecaPrim: public Primitive{
+class PiecePrim: public Primitive{
 public:
 	Cylinder bot, mid, top, cone;
 
 	void draw();
 	void draw(Texture* text);
-	PecaPrim();
+	PiecePrim();
 
-	~PecaPrim(){};
+	~PiecePrim(){};
+};
+
+
+class BoardPrim: public Primitive{
+public:
+	Cube c;
+
+	void draw();
+	void draw(Texture* text);
+	void drawLine(bool lastLine);
+	BoardPrim();
+
+	~BoardPrim(){};
 };
 
 

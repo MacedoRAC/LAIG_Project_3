@@ -681,13 +681,21 @@ ANFScene::ANFScene(char *filename, Graph* graph)
 
 					primitivesDef = primitivesDef->NextSiblingElement("cube");
 				}
-				//Pecas
-				primitivesDef = primitives->FirstChildElement("peca");
+				//Pieces
+				primitivesDef = primitives->FirstChildElement("piece");
 
 				while(primitivesDef){
-					node1.primitives.push_back(new PecaPrim());
+					node1.primitives.push_back(new PiecePrim());
 
-					primitivesDef = primitivesDef->NextSiblingElement("peca");
+					primitivesDef = primitivesDef->NextSiblingElement("piece");
+				}
+				//Board
+				primitivesDef = primitives->FirstChildElement("board");
+
+				while(primitivesDef){
+					node1.primitives.push_back(new BoardPrim());
+
+					primitivesDef = primitivesDef->NextSiblingElement("board");
 				}
 
 				//Rectangles

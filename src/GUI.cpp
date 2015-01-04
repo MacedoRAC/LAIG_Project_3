@@ -58,8 +58,7 @@ void GUI::initGUI()
 		if (graph->lights[i].enabled)
 			addCheckboxToPanel(lightspanel, (char*)graph->lights[i].id.c_str(), NULL, i)->set_int_val(1);
 		else
-			addCheckboxToPanel(lightspanel,
-			(char*)graph->lights[i].id.c_str(), NULL, i)->set_int_val(0);
+			addCheckboxToPanel(lightspanel, (char*)graph->lights[i].id.c_str(), NULL, i)->set_int_val(0);
 	}
 	
 	addColumnToPanel(varPanel);
@@ -170,12 +169,12 @@ void GUI::processHits (GLint hits, GLuint buffer[])
 	// if there were hits, the one selected is in "selected", and it consist of nselected "names" (integer ID's)
 	if (selected!=NULL)
 	{
-		/*// this should be replaced by code handling the picked object's ID's (stored in "selected"), 
+		// this should be replaced by code handling the picked object's ID's (stored in "selected"), 
 		// possibly invoking a method on the scene class and passing "selected" and "nselected"
 		printf("Picked ID's: ");
 		for (int i=0; i<nselected; i++)
 		printf("%d ",selected[i]);
-		printf("\n");*/
+		printf("\n");
 
 		//Menu
 		if(graph->rootId == "menuRoot"){

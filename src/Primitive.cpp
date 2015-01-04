@@ -664,35 +664,38 @@ void Cube:: draw(Texture* text){
 
 
 //PECAPRIM
-PecaPrim::PecaPrim():Primitive("peca"){
+PiecePrim::PiecePrim():Primitive("peca"){
 	bot = Cylinder("cylinder", 2, 1.8, 1, 30, 2);
 	mid = Cylinder("cylinder", 0.8, 0.5, 2.3, 25, 4);
 	top = Cylinder("cylinder", 1.5, 1.5, 0.4, 30, 2);
 	cone = Cylinder("cylinder", 1.5, 0.1, 1.2, 30, 3);
 }
 
-void PecaPrim::draw(){
-	
-	bot.draw();
-
-	glPushMatrix();
-		glTranslatef(0, 0, 1);
-		mid.draw();
-	glPopMatrix();
-
-	glPushMatrix();
-		glTranslatef(0, 0, 3);
-		top.draw();
-	glPopMatrix();
+void PiecePrim::draw(){
 	
 	glPushMatrix();
-		glTranslatef(0, 0, 3.5);
-		cone.draw();
+		bot.draw();
+
+		glPushMatrix();
+			glTranslatef(0, 0, 1);
+			mid.draw();
+		glPopMatrix();
+
+		glPushMatrix();
+			glTranslatef(0, 0, 3);
+			top.draw();
+		glPopMatrix();
+	
+		glPushMatrix();
+			glTranslatef(0, 0, 3.4);
+			cone.draw();
+		glPopMatrix();
+
 	glPopMatrix();
 	
 }
 
-void PecaPrim::draw(Texture* text){
+void PiecePrim::draw(Texture* text){
 
 	glPushMatrix();
 		glTranslatef(0, 0, 3.8);
@@ -709,4 +712,72 @@ void PecaPrim::draw(Texture* text){
 		mid.draw(text);
 	glPopMatrix();
 	bot.draw(text);
+}
+
+
+//BOARDPRIM
+BoardPrim::BoardPrim():Primitive("board"){
+	c = Cube("cube");
+}
+
+void BoardPrim::draw(Texture* text){
+	
+	for(unsigned int i=0; i<7; i++){
+		if(i == 6)
+			drawLine(true);
+		else
+			drawLine(false);
+	}
+}
+
+void BoardPrim::draw(){
+	int l = -18;
+
+	for(unsigned int i=0; i<7; i++){
+		if(i == 6){
+			glPushMatrix();
+				glTranslatef(l, 0, 0);
+				drawLine(true);
+			glPopMatrix();
+		}else{
+			glPushMatrix();
+				glTranslatef(l, 0, 0);
+				drawLine(false);
+			glPopMatrix();
+		}
+
+		l += 6;
+	}
+}
+
+void BoardPrim::drawLine(bool lastLine){
+	int k = 18; //counter for placeholders and side fences
+	int m = 15; //counter for fences
+
+	for(unsigned int i=0; i<7; i++){
+		glPushMatrix(); //draw placeholder
+			glTranslatef(0, 0, k);
+			glScalef(5, 0.5, 5);
+			Cube("cube").draw();
+		glPopMatrix();
+
+		if(!lastLine){
+			glPushMatrix(); //draw side fence
+				glTranslatef(3, -0.5, k);
+				glScalef(1, 0.5, 5);
+				Cube("cube").draw();
+			glPopMatrix();
+		}
+
+		if(i != 6){	
+			glPushMatrix(); //draw fence
+				glTranslatef(0, -0.5, m);
+				glScalef(5, 0.5, 1);
+				Cube("cube").draw();
+			glPopMatrix();
+		}
+
+		k -= 6;
+		m -= 6;
+	}
 }
