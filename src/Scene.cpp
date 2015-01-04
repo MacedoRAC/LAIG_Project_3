@@ -158,6 +158,11 @@ void Scene::display(){
 		break;
 	}
 
+	CGFapplication::activeApp->forceRefresh();
+
+	// Initialize Model-View matrix as identity (no transformation
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
 
 	camIt = cameras.begin() + actualCam;
 	if(camIt != cameras.end()){
@@ -168,13 +173,6 @@ void Scene::display(){
 		glLoadIdentity();
 		CGFscene::activeCamera->applyView();
 	}
-
-
-	CGFapplication::activeApp->forceRefresh();
-
-	// Initialize Model-View matrix as identity (no transformation
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
 
 	// Apply transformations corresponding to the camera position relative to the origin
 
