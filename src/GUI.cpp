@@ -177,6 +177,13 @@ void GUI::processHits (GLint hits, GLuint buffer[])
 		printf("%d ",selected[i]);
 		printf("\n");
 
+		//selected[0] defenido em gamas
+			//0 e 14 -- peças
+		//selected[0] >= 15 e selected[1]
+			//0 e 7 -- casas
+			//8 e 14 -- cercas
+			//15 e 21 -- cercas laterais
+
 		//Menu
 		if(graph->rootId == "menuRoot"){
 			// Ambient
@@ -210,7 +217,8 @@ void GUI::processHits (GLint hits, GLuint buffer[])
 				}
 			}
 		}else{
-
+			if(selected[0] >= 0 && selected[0] <= 13)
+				game->processHit(selected[0]);
 		}
 	}else
 		printf("Nothing selected while picking \n");

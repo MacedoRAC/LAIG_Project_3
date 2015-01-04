@@ -736,11 +736,13 @@ void BoardPrim::draw(){
 	for(unsigned int i=0; i<7; i++){
 		if(i == 6){
 			glPushMatrix();
+				glLoadName(i+15);
 				glTranslatef(l, 0, 0);
 				drawLine(true);
 			glPopMatrix();
 		}else{
 			glPushMatrix();
+				glLoadName(i+15);
 				glTranslatef(l, 0, 0);
 				drawLine(false);
 			glPopMatrix();
@@ -756,24 +758,30 @@ void BoardPrim::drawLine(bool lastLine){
 
 	for(unsigned int i=0; i<7; i++){
 		glPushMatrix(); //draw placeholder
+			glPushName(i);
 			glTranslatef(0, 0, k);
 			glScalef(5, 0.5, 5);
 			Cube("cube").draw();
+			glPopName();
 		glPopMatrix();
 
 		if(!lastLine){
 			glPushMatrix(); //draw side fence
+				glPushName(i+8);
 				glTranslatef(3, -0.5, k);
 				glScalef(1, 0.5, 5);
 				Cube("cube").draw();
+				glPopName();
 			glPopMatrix();
 		}
 
 		if(i != 6){	
 			glPushMatrix(); //draw fence
+				glPushName(i+15);
 				glTranslatef(0, -0.5, m);
 				glScalef(5, 0.5, 1);
 				Cube("cube").draw();
+				glPopName();
 			glPopMatrix();
 		}
 

@@ -1,32 +1,38 @@
 #include"StateOfGame.h"
 
 
-Piece::Piece(string type, int coordX, int coordY){
+Piece::Piece(string type, int coordX, int coordZ, int id1, int id2){
 	this->type=type;
 	this->coordX=coordX;
-	this->coordY=coordY;
+	this->coordZ=coordZ;
+	this->id1=id1;
+	this->id2=id2;
+	this->selected = false;
 }
 
-Fence::Fence(int coordX, int coordY){
+Fence::Fence(int coordX, int coordZ){
+	this->active = false;
 	this->coordX=coordX;
-	this->coordY=coordY;
+	this->coordZ=coordZ;
 }
 
 StateOfGame:: StateOfGame(){
+	this->player="white";
 	this->winner="";
-	board = new Board();  //tabuleiro
+	board = new BoardPrim();  //tabuleiro
 	initGame();
 }
 
 void StateOfGame:: initGame(){
-	Piece w1 = Piece("white", -18, 0);
-	whitePieces.push_back(w1);
-	Piece r1 = Piece("red", 18, 0);
-	redPieces.push_back(r1);
+	Piece w1 = Piece("white", -18, 0, 19, 0);
+	pieces.push_back(w1);
+	Piece r1 = Piece("red", 18, 0, 19, 6);
+	pieces.push_back(r1);
 
 }
 
 StateOfGame:: StateOfGame(Graph* graph, char* difficulty, char* modeOfGame){
+	this->player="white";
 	this->graph=graph;
 	difficulty=difficulty;
 	modeOfGame=modeOfGame;
@@ -38,8 +44,7 @@ void StateOfGame::prologParser(string state){
 }
 
 StateOfGame& StateOfGame:: operator=(const StateOfGame & state){
-	this->whitePieces = state.whitePieces;
-	this->redPieces = state.redPieces;
+	this->pieces = state.pieces;
 	this->fences = state.fences;
 	this->winner = state.winner;
 
@@ -55,14 +60,31 @@ void StateOfGame:: draw(){
 
 	board->draw();
 
-	for(unsigned int i = 0; i < whitePieces.size(); i++){
-		whitePieces[i].draw();
+	for(unsigned int i = 0; i < pieces.size(); i++){
+		glPushMatrix();
+			glLoadName(i);
+			pieces[i].draw();
+		glPopMatrix();
 	}
 
-	for(unsigned int i = 0; i < redPieces.size(); i++){
-		redPieces[i].draw();
-	}
 
 	glPopMatrix();
+
+}
+
+void Piece::draw(){
+	glPushMatrix();
+	glTranslatef(coordX, 0.3, coordZ);
+		glRotatef(-90, 1, 0, 0);
+		peca.draw();
+	glPopMatrix();
+}
+
+void StateOfGame::processHit(int value){
+	if(this->player == pieces[value].type)
+		pieces[value].selected = true;
+}
+
+void StateOfGame::processHit(int column, int line){
 
 }

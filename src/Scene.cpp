@@ -133,6 +133,8 @@ void Scene::init(){
 		lights.push_back(newLight);
 	}
 
+	this->game = new StateOfGame();
+
 	//Menu
 	if(graph->rootId == "menuRoot")
 		setupMenu();
@@ -158,11 +160,7 @@ void Scene::display(){
 		break;
 	}
 
-	CGFapplication::activeApp->forceRefresh();
-
-	// Initialize Model-View matrix as identity (no transformation
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
+	
 
 	camIt = cameras.begin() + actualCam;
 	if(camIt != cameras.end()){
@@ -173,6 +171,8 @@ void Scene::display(){
 		glLoadIdentity();
 		CGFscene::activeCamera->applyView();
 	}
+
+	CGFapplication::activeApp->forceRefresh();
 
 	// Apply transformations corresponding to the camera position relative to the origin
 
@@ -195,7 +195,8 @@ void Scene::display(){
 	axis.draw();
 	
 	Appearance * app = NULL;
-	graph->rootNode->draw(app);
+	game->draw();
+	//graph->rootNode->draw(app);
 	
 	glutSwapBuffers();
 }

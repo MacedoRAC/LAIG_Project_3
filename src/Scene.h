@@ -6,6 +6,7 @@
 #include"Primitive.h"
 #include<vector>
 #include"CGFapplication.h"
+#include "StateOfGame.h"
 
 class Scene: public CGFscene{
 	
@@ -17,6 +18,7 @@ public:
 	int light0, light1, light2, light3;
 	vector<Camera*>::iterator camIt;
 	vector<Camera*> cameras;
+	StateOfGame* game;
 	
 	void init();
 	void display();
