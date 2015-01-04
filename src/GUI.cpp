@@ -7,23 +7,24 @@ GLuint selectBuf[BUFSIZE];
 
 GUI:: GUI(Graph* graph){
 	this->graph=graph;
-	
+
 	map<string, Camera*>::iterator it;
 
 	for(it=graph->cameras.begin(); it!=graph->cameras.end(); it++){
 		cameras.push_back((*it).second->id);
 	}
 
-	fileToLoad = (char*)"classic.xml";
+	/*fileToLoad = (char*)"classic.xml";
 	difficulty = (char*)"medium";
 	modeOfGame = (char*)"pvp";
-	this->game = NULL;
+	
+	this->game = NULL;*/
 }
 
 
 void GUI::initGUI()
 {
-
+	//socketConnection();
 	graph = (((Scene*) scene)->graph);
 
 	int* wire = &(((Scene*) scene)->wire);
@@ -170,12 +171,12 @@ void GUI::processHits (GLint hits, GLuint buffer[])
 	// if there were hits, the one selected is in "selected", and it consist of nselected "names" (integer ID's)
 	if (selected!=NULL)
 	{
-		/*// this should be replaced by code handling the picked object's ID's (stored in "selected"), 
+		// this should be replaced by code handling the picked object's ID's (stored in "selected"), 
 		// possibly invoking a method on the scene class and passing "selected" and "nselected"
 		printf("Picked ID's: ");
 		for (int i=0; i<nselected; i++)
 		printf("%d ",selected[i]);
-		printf("\n");*/
+		printf("\n");
 
 		//Menu
 		if(graph->rootId == "menuRoot"){
@@ -214,7 +215,6 @@ void GUI::processHits (GLint hits, GLuint buffer[])
 		}
 	}else
 		printf("Nothing selected while picking \n");
-
 }
 
 
