@@ -3,6 +3,7 @@
 #include"CGFobject.h"
 #include<math.h>
 #include <cstdlib>
+#include"CGFappearance.h"
 
 Primitive:: Primitive(string type){
 	this->type=type;
@@ -715,9 +716,62 @@ void PiecePrim::draw(Texture* text){
 }
 
 
+//PLACEHOLDER
+PlaceholderPrim::PlaceholderPrim():Primitive("placeholder"){
+	this->selected = false;
+}
+
+void PlaceholderPrim::draw(){
+
+	glPushMatrix();
+		glTranslatef(2.5, 0, 2.5);
+		glScalef(5, 0.5, 5);
+		Cube("cube").draw();
+	glPopMatrix();
+}
+
+void PlaceholderPrim::draw(Texture* text){
+
+	glPushMatrix();
+		glTranslatef(2.5, 0, 2.5);
+		glScalef(5, 0.5, 5);
+		Cube("cube").draw();
+	glPopMatrix();
+}
+
+
+//FENCEPRIM
+FencePrim::FencePrim():Primitive("fence"){
+	this->enabled = false;
+}
+
+void FencePrim::draw(){
+	glPushMatrix();
+	
+	glScalef(1, 0.5, 5);
+	
+	if(this->enabled)
+		glTranslatef(0, 1, 0);
+	else
+		glTranslatef(0, -0.5, 0);
+	
+	Cube("cube").draw();
+	
+	glPopMatrix();
+}
+
+void FencePrim::draw(Texture* text){
+	
+	glPushMatrix();
+		glTranslatef(0, -0.5, 0);
+		glScalef(1, 0.5, 5);
+		Cube("cube").draw();
+	glPopMatrix();
+
+}
+
 //BOARDPRIM
 BoardPrim::BoardPrim():Primitive("board"){
-	c = Cube("cube");
 }
 
 void BoardPrim::draw(Texture* text){

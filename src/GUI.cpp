@@ -1,5 +1,4 @@
 #include"GUI.h"
-#include"Scene.h"
 
 // buffer to be used to store the hits during picking
 #define BUFSIZE 256
@@ -17,14 +16,15 @@ GUI:: GUI(Graph* graph){
 	/*fileToLoad = (char*)"classic.xml";
 	difficulty = (char*)"medium";
 	modeOfGame = (char*)"pvp";
-	
-	this->game = NULL;*/
+	*/
+	this->game = new StateOfGame();
 }
 
 
 void GUI::initGUI()
 {
-	//socketConnection();
+	socketConnect();
+
 	graph = (((Scene*) scene)->graph);
 
 	int* wire = &(((Scene*) scene)->wire);
@@ -217,8 +217,10 @@ void GUI::processHits (GLint hits, GLuint buffer[])
 				}
 			}
 		}else{
-			if(selected[0] >= 0 && selected[0] <= 13)
+			if(selected[0] >= 0 && selected[0] < 14){ //peca
 				game->processHit(selected[0]);
+			}else
+				game->processHit(selected[0], selected[1]);
 		}
 	}else
 		printf("Nothing selected while picking \n");
@@ -231,5 +233,13 @@ void GUI::startGame(){
 	ANFScene anf = ANFScene(fileToLoad, pgraph);
 	this->graph = pgraph;
 
-	game = new StateOfGame(graph, difficulty, modeOfGame);
+	string ambient = "";
+	if(fileToLoad == "classic.xml")
+		ambient = "classic";
+	else if(fileToLoad == "modern.xml")
+		ambient = "modern";
+	else
+		ambient = "garden";
+
+	game = new StateOfGame(graph, difficulty, modeOfGame, ambient);
 }

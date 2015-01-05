@@ -153,10 +153,32 @@ public:
 	~PiecePrim(){};
 };
 
+class PlaceholderPrim: public Primitive{
+public:
+	bool selected;
+
+	PlaceholderPrim();
+	void draw();
+	void draw(Texture* text);
+
+	~PlaceholderPrim(){};
+};
+
+
+class FencePrim: public Primitive{
+public:
+	bool enabled;
+
+	FencePrim();
+	void draw();
+	void draw(Texture* text);
+
+	~FencePrim(){};
+};
+
 
 class BoardPrim: public Primitive{
 public:
-	Cube c;
 
 	void draw();
 	void draw(Texture* text);

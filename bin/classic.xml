@@ -1,0 +1,249 @@
+<anf>
+    <globals>
+        <drawing mode="fill" shading="gouraud" background="0.14 0.46 0.25 0.6" />
+        <culling face="back" order="ccw" />
+        <lighting doublesided="false" local="false" enabled="true" ambient="0.8 0.8 0.8 0.8" />
+    </globals>
+
+    <cameras initial="Top view" >
+        <perspective id="Top view" near="10" far="-20" angle="0" pos="0 50 0" target="0 0 0" />
+        <perspective id="Red Player" near="-5" far="40" angle="0" pos="18 10 -5" target="18 3 18" />
+        <perspective id="White Player" near="40" far="-5" angle="0" pos="18 10 42" target="18 3 18" />
+    </cameras>
+
+    <lights>
+        <light id="Top light" type="omni" enabled="true" marker="true" pos="0 100 0" >
+            <component type="ambient" value="1 1 1 0.5" />
+            <component type="diffuse" value="1 1 1 0.8" />
+            <component type="specular" value="1 1 1 0.8" />
+        </light>
+
+        <light id="Red player light" type="spot" enabled="true" marker="true" pos="18 10 -20" target="18 3 18"  
+            angle="20" exponent="25" >
+            <component type="ambient" value="1 1 1 1" />
+            <component type="diffuse" value="1 1 1 1" />
+            <component type="specular" value="1 1 1 1" />
+        </light>
+
+        <light id="White player light" type="spot" enabled="true" marker="true" pos="18 10 60" target="18 3 18"  
+            angle="20" exponent="25" >
+            <component type="ambient" value="0 1 1 1" />
+            <component type="diffuse" value="0 1 1 1" />
+            <component type="specular" value="0 1 1 1" />
+        </light>
+    </lights>
+
+    <textures>
+        <texture id="tableWood" file="img/tableWood.png" texlength_s="1.5" texlength_t="1.1" />
+        <texture id="metalic" file="img/metalic.png" texlength_s="6.4" texlength_t="4.8" />
+        <texture id="estofo" file="img/estofo.png" texlength_s="5.75" texlength_t="4" />
+    </textures>
+
+    <appearances>
+        <appearance id="defaultAppearance" shininess="20">
+            <component type="ambient" value="1 1 1 1" />
+            <component type="diffuse" value="1 1 1 1" />
+            <component type="specular" value="1 1 1 1" />
+        </appearance>
+
+        <appearance id="table" shininess="20" textureref="tableWood">
+            <component type="ambient" value="0.89 0.76 0 1" />
+            <component type="diffuse" value="0.89 0.76 0 1" />
+            <component type="specular" value="0.89 0.76 0 1" />
+        </appearance>
+
+        <appearance id="chairLegs" shininess="20" textureref="metalic">
+            <component type="ambient" value="1 0.57 0.01 1" />
+            <component type="diffuse" value="1 0.57 0.01 1" />
+            <component type="specular" value="1 0.57 0.01 1" />
+        </appearance>
+
+        <appearance id="estofo" shininess="20" textureref="estofo">
+            <component type="ambient" value="0.2 0.8 0.3 1" />
+            <component type="diffuse" value="0.2 0.8 0.3 1" />
+            <component type="specular" value="0.2 0.8 0.3 1" />
+        </appearance>
+    </appearances>
+
+    <animations>
+    	
+    </animations>
+
+    <graph rootid="classic">
+        <node id="classic">
+            <transforms>
+            </transforms>
+
+            <appearanceref id="defaultAppearance" />
+
+            <primitives>
+            </primitives>
+
+            <descendants>
+                <noderef id="table" />
+                <noderef id="chair1" />
+                <noderef id="chair2" />
+            </descendants>
+        </node>
+
+        <node id="table">
+            <transforms>
+            </transforms>
+
+            <appearanceref id="table" />
+
+            <primitives>
+            </primitives>
+
+            <descendants>
+                <noderef id="table_leg" />
+                <noderef id="table_base" />
+                <noderef id="table_top" />
+            </descendants>
+        </node>
+
+        <node id="table_top">
+            <transforms>
+                <transform type="translate" to="18 -2.5 18" />
+            </transforms>
+
+            <appearanceref id="inherit" />
+
+            <primitives>
+                <cylinder base="30" top="30" height="5" slices="60" stacks="5"/>
+            </primitives>
+
+            <descendants>
+            </descendants>
+        </node>
+
+        <node id="table_leg">
+            <transforms>
+                <transform type="translate" to="18 -35 18" />
+            </transforms>
+
+            <appearanceref id="inherit" />
+
+            <primitives>
+                <cylinder base="12" top="12" height="60" slices="30" stacks="15"/>
+            </primitives>
+
+            <descendants>
+            </descendants>
+        </node>
+
+        <node id="table_base">
+            <transforms>
+                <transform type="translate" to="18 -67 18" />
+            </transforms>
+
+            <appearanceref id="inherit" />
+
+            <primitives>
+                <cylinder base="20" top="18" height="3.5" slices="35" stacks="4"/>
+            </primitives>
+
+            <descendants>
+            </descendants>
+        </node>
+
+        <node id="chair1">
+            <transforms>
+            </transforms>
+
+            <appearanceref id="defaultAppearance" />
+            
+            <primitives>
+            </primitives>
+
+            <descendants>
+                <noderef id="chair_leg1" />
+                <noderef id="chair_leg2" />
+                <noderef id="chair_leg3" />
+                <noderef id="cylinder" />
+            </descendants>
+        </node>
+
+        <node id="chair2">
+            <transforms>
+            </transforms>
+
+            <appearanceref id="defaultAppearance" />
+
+            <primitives>
+            </primitives>
+
+            <descendants>
+                <noderef id="chair_leg1" />
+                <noderef id="chair_leg2" />
+                <noderef id="chair_leg3" />
+                <noderef id="cylinder" />
+            </descendants>
+        </node>
+
+        <node id="chair_leg1">
+            <transforms>
+                <transform type="rotate" axis="z" angle="-30" />
+                <transform type="rotate" axis="y" angle="120" />
+                <transform type="translate" to="-18 0 0" />
+            </transforms>
+
+            <appearanceref id="chairLegs" />
+
+            <primitives>
+                <cylinder base="2" top="1.5" height="72" slices="25" stacks="60"/>
+            </primitives>
+
+            <descendants>
+            </descendants>
+        </node>
+
+        <node id="chair_leg2">
+            <transforms>
+                <transform type="rotate" axis="z" angle="-30" />
+                <transform type="rotate" axis="y" angle="240" />
+                <transform type="translate" to="-8 0 6" />
+            </transforms>
+
+            <appearanceref id="chairLegs" />
+
+            <primitives>
+                <cylinder base="2" top="1.5" height="72" slices="25" stacks="60"/>
+            </primitives>
+
+            <descendants>
+            </descendants>
+        </node>
+
+        <node id="chair_leg3">
+            <transforms>
+                <transform type="rotate" axis="z" angle="-30" />
+                <transform type="translate" to="0 0 -18" />
+            </transforms>
+
+            <appearanceref id="chairLegs" />
+
+            <primitives>
+                <cylinder base="2" top="1.5" height="72" slices="25" stacks="60"/>
+            </primitives>
+
+            <descendants>
+            </descendants>
+        </node>
+
+        <node id="cylinder">
+            <transforms>
+                <transform type="translate" to="0 3 0" />
+            </transforms>
+
+            <appearanceref id="estofo" />
+
+            <primitives>
+                <cylinder base="10" top="7" height="3" slices="35" stacks="20"/>
+            </primitives>
+
+            <descendants>
+            </descendants>
+        </node>
+    </graph>
+</anf>

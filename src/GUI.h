@@ -3,9 +3,8 @@
 
 #include "CGFinterface.h"
 #include "Camera.h"
-#include "Graph.h"
-#include "StateOfGame.h"
 #include "ANFScene.h"
+#include"Scene.h"
 
 class GUI: public CGFinterface{
 public:
