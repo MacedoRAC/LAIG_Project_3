@@ -346,7 +346,7 @@ void StateOfGame::processHit(int sel0, int sel1){
 				}else{
 					sel_ph[0] = sel0;
 					sel_ph[1] = sel1;
-					placeholders[sel0*7+sel1].selected = true;
+					placeholders[(sel0-15)*7+sel1].selected = true;
 				}
 			}else if(pieces[i].selected && !((pieces[i].type=="white" && player==1) || (pieces[i].type=="red" && player==2))){
 				pieces[i].selected = false;
@@ -363,27 +363,27 @@ void StateOfGame::processHit(int sel0, int sel1){
 			}
 		}
 
-		string fenceDir = "";
+		int fenceDir = 0;
 		vector<Fence>::iterator itsf = sideFences.begin();
 		vector<Fence>::iterator itf = fences.begin();
 
 		for(unsigned int i=0; i<placeholders.size(); i++){
 			if(placeholders[i].selected){
 				if(sel0 == sel_ph[0]-1 && sel1 == sel_ph[1]+15){
-					fenceDir = "up";
+					fenceDir = 1;//up
 					fences[7*(sel0-15)+sel1-15].active = true;
 				}else if(sel0 == sel_ph[0] && sel1 == sel_ph[1]+7){
-					fenceDir = "left";
+					fenceDir = 4;//left
 					sideFences[6*(sel0-15)+sel1-8].active = true;
 				}else if(sel0 == sel_ph[0] && sel1 == sel_ph[1]+8){
-					fenceDir = "right";
+					fenceDir = 2;//right
 					sideFences[6*(sel0-15)+sel1-8].active = true;
 				}else if(sel0 == sel_ph[0] && sel1 == sel_ph[1]+15){
-					fenceDir = "down";
+					fenceDir = 3;//down
 					fences[7*(sel0-15)+sel1-15].active = true;
 				}
-				if(fenceDir != ""){
-					tryToAddFence(placeholders[i], sel0, sel1, placeholders[i].piece->coordZ, placeholders[i].piece->coordX, sel_ph[0], sel_ph[1], fenceDir);
+				if(fenceDir != 0){
+					tryToAddFence(placeholders[i], sel0, sel1, pieces[i].coordX+15, pieces[i].coordZ, sel_ph[0], sel_ph[1], fenceDir);
 				}else{
 					unselectAll();
 				}
@@ -396,24 +396,13 @@ void StateOfGame::processHit(int sel0, int sel1){
 
 bool StateOfGame::addPiece(int column, int row){
 
-	int Npieces = 0;
-	if(player == 1){
-		for(unsigned int i=0; i<pieces.size(); i++)
-			if(pieces[i].type == "white" && pieces[i].coordX != -1)
-				Npieces++;
-	}
-	else
-		for(unsigned int i=0; i<pieces.size(); i++)
-			if(pieces[i].type == "red" && pieces[i].coordX != -1)
-				Npieces++;
-
 	stringstream message;
 	message << "[addPiece, "
 			<< boardToString() << ", "
 			<< player << ", "
 			<< column-15 << ", "
 			<< row << ", "
-			<< Npieces
+			<< /*Npieces*/ 7
 			<< "].\n";
 
 	envia((char*) message.str().c_str(), strlen(message.str().c_str()));
@@ -427,19 +416,20 @@ bool StateOfGame::addPiece(int column, int row){
 		return false;
 }
 
-bool StateOfGame::addFence(int column, int row, int columnD, int rowD, string fenceDir){
+bool StateOfGame::addFence(int column, int row, int columnD, int rowD, int fenceDir){
 
 
 	//verificar se placeholder e placeholder de destino nao tem peças associadas
 
 	stringstream message;
 	message << "[addFence, "
-			<< boardToString() << ", "
 			<< column-15 << ", "
 			<< row << ", "
 			<< columnD-15 << ", "
 			<< rowD << ", "
-			<< fenceDir
+			<< fenceDir << ", " 
+			<< boardToString() << ", "
+			<< player
 			<< "].\n";
 	
 	envia((char*) message.str().c_str(), strlen(message.str().c_str()));
@@ -496,9 +486,9 @@ string StateOfGame::boardToString(){
 					itp++;
 				}else{//side fence
 					if(itsf->active)
-						aux += "x";
+						aux += "x,";
 					else
-						aux += "e";
+						aux += "e,";
 
 					itsf++;
 				}
@@ -616,7 +606,7 @@ void StateOfGame::tryToAddPiece(int pIt, int column, int row){
 		unselectAll();
 }
 
-void StateOfGame::tryToAddFence(Placeholder p, int sel0, int sel1, int column, int row, int columnD, int rowD, string fenceDir){
+void StateOfGame::tryToAddFence(Placeholder p, int sel0, int sel1, int column, int row, int columnD, int rowD, int fenceDir){
 
 	if(addFence(column, row, columnD, rowD, fenceDir) == true){
 		placeholders[(sel_ph[0]-15)*7+sel_ph[1]].piece=placeholders[(p.coordZ-15)+p.coordX].piece;
@@ -629,15 +619,12 @@ void StateOfGame::tryToAddFence(Placeholder p, int sel0, int sel1, int column, i
 			}
 		}
 
-		if(fenceDir == "right" || fenceDir == "left")
+		if(fenceDir == 2 || fenceDir == 4)
 			fences[(sel0-15)*6+sel1].active = true;
 		else{
 			sideFences[(sel0-15)*7+sel1].active = true;
 		}
-
-		placeholders[(p.coordZ-15)+p.coordX].piece->selected = false;
-		placeholders[(sel_ph[0]-15)*7+sel_ph[1]].selected = false;
-
+		
 		nextPlayer();
 	}else
 		unselectAll();

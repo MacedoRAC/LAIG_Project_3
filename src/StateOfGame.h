@@ -93,9 +93,9 @@ public:
 
 	//game logic methods
 	bool addPiece(int column, int row);
-	bool addFence(int column, int row, int columnD, int rowD, string fenceDir);
+	bool addFence(int column, int row, int columnD, int rowD, int fenceDir);
 	void tryToAddPiece(int pIt, int column, int row);
-	void tryToAddFence(Placeholder p, int sel0, int sel1, int column, int row, int columnD, int rowD, string fenceDir);
+	void tryToAddFence(Placeholder p, int sel0, int sel1, int column, int row, int columnD, int rowD, int fenceDir);
 	void nextPlayer();
 	bool gameOver();
 	void getPontuatiuons();

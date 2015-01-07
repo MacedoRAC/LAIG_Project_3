@@ -2,7 +2,7 @@
 
 :-consult(plogcode).
 
-port(60001).
+port(60070).
 
 server:-
 	port(Port),
@@ -22,13 +22,17 @@ server_loop(Stream) :-
 	flush_output(Stream),
 	(ClientMsg == quit; ClientMsg == end_of_file), !.
 
-parse_input([addPiece, Board, Player, Column, Row, Npieces], [NewBoard]):-
-	placeNewPiece(Row, Column, Player, Board, NewBoard, Npieces), !.
-parse_input([addPiece, Board, Player, Column, Row, Npieces], 0):- !.
+parse_input([addPiece, Board, Player, Column, Row, Size], Ans):-
+	placeNewPiece(Row, Column, Player, Board, NewBoard, Size), !,
+	Ans is 1.
+parse_input([addPiece, Board, Player, Column, Row, Size], Ans):- !,
+	Ans is 0.
 
-parse_input([addFence, Board, Xi, Yi, Xf, Yf, FenceDir, Player], [NewBoard]):-
-	placeBarrier(Xi,Yi,Xf,Yf,FenceDir,Board,NewBoard,Player), !.
-parse_input([addFence, Board, Xi, Yi, Xf, Yf, FenceDir, Player], 0):- !.
+parse_input([addFence, Xi, Yi, Xf, Yf, FenceDir, Board, Player], Ans):-
+	placeBarrier(Xi,Yi,Xf,Yf,FenceDir,Board,NewBoard,Player),!,
+	Ans is 1.
+parse_input([addFence, Xi, Yi, Xf, Yf, FenceDir, Board, Player], Ans):- !,
+	Ans is 0.
 
 parse_input([gameOver, Board], 1):-
 	gameOver(Board), !.
