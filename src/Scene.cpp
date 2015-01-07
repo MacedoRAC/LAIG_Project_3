@@ -195,8 +195,9 @@ void Scene::display(){
 	axis.draw();
 	
 	Appearance * app = NULL;
+	
+	graph->rootNode->draw(app);
 	game->draw();
-	//graph->rootNode->draw(app);
 	
 	glutSwapBuffers();
 }
@@ -207,6 +208,8 @@ void Scene::update(unsigned long milis){
 	
 	for(it = graph->nodes.begin(); it != graph->nodes.end(); it++)
 		it->second.update(milis);
+
+	game->update(milis);
 }
 
 

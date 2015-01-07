@@ -24,7 +24,7 @@ bool socketConnect() {// Initialize Winsock.
     sockaddr_in clientService;
     clientService.sin_family = AF_INET;
     // Just test using the localhost, you can try other IP address
-    clientService.sin_addr.s_addr = inet_addr("192.168.1.70");
+    clientService.sin_addr.s_addr = inet_addr(IPADDRESS);
     clientService.sin_port = htons(60070);
 
     if (connect(m_socket, (SOCKADDR*)&clientService, sizeof(clientService)) == SOCKET_ERROR) {
@@ -70,8 +70,7 @@ void quit() {
 }
 
 int startConnection() {
-	socketConnect();
-	char *s = "startGame(7)";
+	char *s = "";
 	envia(s, strlen(s));
 	char ans[128];
 	recebe(ans);

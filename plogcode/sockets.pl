@@ -1,5 +1,7 @@
 :-use_module(library(sockets)).
 
+:-consult(plogcode).
+
 port(60001).
 
 server:-

@@ -34,6 +34,7 @@ public:
 	float distance, xTranslation, yTranslation, zTranslation, rotationAngle;
 	unsigned long deltaT;
 
+	LinearAnimation(){};
 	LinearAnimation(string id, float span, string type, vector<vector<float>> ctrlPoints);
 	void update(unsigned long time);
 	void apply();

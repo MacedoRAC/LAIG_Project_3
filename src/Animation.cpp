@@ -13,7 +13,7 @@ Animation::Animation(string id, float span, string type){
 	this->id=id;
 	this->span=span;
 	this->type=type;
-	this->reset=true;
+	this->reset=false;
 }
 
 void Animation::init(unsigned long time){
