@@ -24,15 +24,15 @@ server_loop(Stream) :-
 
 parse_input([addPiece, Board, Player, Column, Row, Size], Ans):-
 	placeNewPiece(Row, Column, Player, Board, NewBoard, Size), !,
-	Ans is 1.
+	Ans = 1.
 parse_input([addPiece, Board, Player, Column, Row, Size], Ans):- !,
-	Ans is 0.
+	Ans = 0.
 
-parse_input([addFence, Xi, Yi, Xf, Yf, FenceDir, Board, Player], Ans):-
-	placeBarrier(Xi,Yi,Xf,Yf,FenceDir,Board,NewBoard,Player),!,
-	Ans is 1.
-parse_input([addFence, Xi, Yi, Xf, Yf, FenceDir, Board, Player], Ans):- !,
-	Ans is 0.
+parse_input([addFence, Xi, Yi, Yf, Xf, FenceDir, Board, Player], Ans):-
+	placeBarrier(Xi,Yi,Xf,Yf,FenceDir,Board,NewBoard,Player), !,
+	Ans = 1.
+parse_input([addFence, Xi, Yi, Yf, Xf, FenceDir, Board, Player], Ans):- !,
+	Ans = 0.
 
 parse_input([gameOver, Board], 1):-
 	gameOver(Board), !.
