@@ -46,11 +46,8 @@ StateOfGame:: StateOfGame(){
 	initGame();
 }
 
-StateOfGame:: StateOfGame(Graph* graph, char* difficulty, char* modeOfGame, string ambient){
+StateOfGame:: StateOfGame(string ambient){
 	this->player = 1;
-	this->graph=graph;
-	difficulty=difficulty;
-	modeOfGame=modeOfGame;
 	winner="";
 	this->Pont1 = 0;
 	this->Pont2 = 0;
