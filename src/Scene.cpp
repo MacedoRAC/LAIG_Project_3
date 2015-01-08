@@ -133,7 +133,7 @@ void Scene::init(){
 		lights.push_back(newLight);
 	}
 
-	this->game = new StateOfGame(ambient);
+	this->game = new StateOfGame();
 
 	//Menu
 	if(graph->rootId == "menuRoot")

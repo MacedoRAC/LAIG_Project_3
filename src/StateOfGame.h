@@ -57,6 +57,9 @@ public:
 class StateOfGame{
 public:
 	char* winner;
+	char* difficulty;
+	char* modeOfGame;
+	Graph* graph;
 	int player;
 	int Npieces_red;
 	int Npieces_white;
@@ -80,7 +83,7 @@ public:
 	void processHit(int sel0, int sel1);
 
 	StateOfGame();
-	StateOfGame(string ambient);
+	StateOfGame(Graph* graph, char* difficulty, char* modeOfGame, string ambient);
 	~StateOfGame(){};
 	void prologParser(string state);
 	StateOfGame & operator=(const StateOfGame & state);

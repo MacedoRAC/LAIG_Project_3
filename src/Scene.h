@@ -19,13 +19,12 @@ public:
 	vector<Camera*>::iterator camIt;
 	vector<Camera*> cameras;
 	StateOfGame* game;
-	string ambient;
 	
 	void init();
 	void display();
 	void update(unsigned long milis);
 	void setupMenu();
-	Scene(string ambient){this->ambient = ambient;};
+
 };
 
 #endif
