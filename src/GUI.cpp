@@ -7,66 +7,107 @@ GLuint selectBuf[BUFSIZE];
 GUI:: GUI(Graph* graph){
 	this->graph=graph;
 
-	map<string, Camera*>::iterator it;
-
-	for(it=graph->cameras.begin(); it!=graph->cameras.end(); it++){
-		cameras.push_back((*it).second->id);
-	}
-
-	/*fileToLoad = (char*)"classic.xml";
-	difficulty = (char*)"medium";
-	modeOfGame = (char*)"pvp";
-	*/
-	this->game = new StateOfGame();
+	fileToLoad = (char*)"classic.xml";
+	this->startPlay = false;
 }
 
 
 void GUI::initGUI()
 {
-	socketConnect();
-	
 	graph = (((Scene*) scene)->graph);
-
-	int* wire = &(((Scene*) scene)->wire);
-
-	int* cam = &(((Scene*) scene)->actualCam);
-
 	
-	GLUI_Panel *varPanel= addPanel("Settings:", 1);
-
-
-	GLUI_Panel *modepanel = addPanelToPanel(varPanel, "Mode", 1);
-	GLUI_RadioGroup* wireFrameGroup = addRadioGroupToPanel(modepanel,wire);
-	addRadioButtonToGroup(wireFrameGroup, "\tFill");
-	addRadioButtonToGroup(wireFrameGroup, "\tWire");
-	addRadioButtonToGroup(wireFrameGroup, "\tPoint");
-	
-	addColumnToPanel(varPanel);
-	GLUI_Panel *cammodel = addPanelToPanel(varPanel, "Camera", 1);
-	GLUI_RadioGroup* camerasGroup = addRadioGroupToPanel(cammodel,cam);
-	for(unsigned int i = 0; i < cameras.size();i++)
-	{
-
-		addRadioButtonToGroup(camerasGroup, (char *)cameras[i].c_str());
+	map<string, Camera*>::iterator it;
+	for(it=graph->cameras.begin(); it!=graph->cameras.end(); it++){
+		cameras.push_back((*it).second->id);
 	}
-	addRadioButtonToGroup(camerasGroup, "Free Camera");
-	
 
-	addColumnToPanel(varPanel);
-	GLUI_Panel *lightspanel = addPanelToPanel(varPanel, "Lights", 1);
-	for(unsigned int i = 0; i < graph->lights.size();i++)
-	{
-		if (graph->lights[i].enabled)
-			addCheckboxToPanel(lightspanel, (char*)graph->lights[i].id.c_str(), NULL, i)->set_int_val(1);
-		else
-			addCheckboxToPanel(lightspanel, (char*)graph->lights[i].id.c_str(), NULL, i)->set_int_val(0);
+	if(startPlay){
+		//clean menu interface
+		varPanel->hidden=true;
+		modepanel->hidden=true;
+		wireFrameGroup->hidden=true;
+		cammodel->hidden=true;
+		camerasGroup->hidden=true;
+		lightspanel->hidden=true;
+		flagPanel->hidden=true;
+		
+		//new interface
+		socketConnect();
+
+		int* wire = &(((Scene*) scene)->wire);
+
+		int* cam = &(((Scene*) scene)->actualCam);
+
+
+		game_varPanel = addPanel("Settings:", 1);
+
+
+		game_modepanel = addPanelToPanel(game_varPanel, "Mode", 1);
+		game_wireFrameGroup = addRadioGroupToPanel(game_modepanel,wire);
+		addRadioButtonToGroup(game_wireFrameGroup, "\tFill");
+		addRadioButtonToGroup(game_wireFrameGroup, "\tWire");
+		addRadioButtonToGroup(game_wireFrameGroup, "\tPoint");
+
+		addColumnToPanel(game_varPanel);
+		game_cammodel = addPanelToPanel(game_varPanel, "Camera", 1);
+		game_camerasGroup = addRadioGroupToPanel(game_cammodel,cam);
+
+		for(unsigned int i = 0; i < cameras.size();i++){
+			addRadioButtonToGroup(game_camerasGroup, (char *)cameras[i].c_str());
+		}
+		addRadioButtonToGroup(game_camerasGroup, "Free Camera");
+
+
+		addColumnToPanel(game_varPanel);
+		game_lightspanel = addPanelToPanel(game_varPanel, "Lights", 1);
+		for(unsigned int i = 0; i < graph->lights.size();i++)
+		{
+			if (graph->lights[i].enabled)
+				addCheckboxToPanel(game_lightspanel, (char*)graph->lights[i].id.c_str(), NULL, i)->set_int_val(1);
+			else
+				addCheckboxToPanel(game_lightspanel, (char*)graph->lights[i].id.c_str(), NULL, i)->set_int_val(0);
+		}
+	}else{
+		int* wire = &(((Scene*) scene)->wire);
+
+		int* cam = &(((Scene*) scene)->actualCam);
+
+
+		varPanel = addPanel("Settings:", 1);
+
+
+		modepanel = addPanelToPanel(varPanel, "Mode", 1);
+		wireFrameGroup = addRadioGroupToPanel(modepanel,wire);
+		addRadioButtonToGroup(wireFrameGroup, "\tFill");
+		addRadioButtonToGroup(wireFrameGroup, "\tWire");
+		addRadioButtonToGroup(wireFrameGroup, "\tPoint");
+
+		addColumnToPanel(varPanel);
+		cammodel = addPanelToPanel(varPanel, "Camera", 1);
+		camerasGroup = addRadioGroupToPanel(cammodel,cam);
+
+		for(unsigned int i = 0; i < cameras.size();i++){
+			addRadioButtonToGroup(camerasGroup, (char *)cameras[i].c_str());
+		}
+		addRadioButtonToGroup(camerasGroup, "Free Camera");
+
+
+		addColumnToPanel(varPanel);
+		lightspanel = addPanelToPanel(varPanel, "Lights", 1);
+		for(unsigned int i = 0; i < graph->lights.size();i++)
+		{
+			if (graph->lights[i].enabled)
+				addCheckboxToPanel(lightspanel, (char*)graph->lights[i].id.c_str(), NULL, i)->set_int_val(1);
+			else
+				addCheckboxToPanel(lightspanel, (char*)graph->lights[i].id.c_str(), NULL, i)->set_int_val(0);
+		}
+
+		addColumnToPanel(varPanel);
+		flagPanel = addPanelToPanel(varPanel, "Flag", 1);
+		windSpinner = addSpinnerToPanel(flagPanel, "Wind", GLUI_SPINNER_INT, &wind);
+
+		windSpinner->set_int_limits(0, 10, GLUI_LIMIT_WRAP);
 	}
-	
-	addColumnToPanel(varPanel);
-	GLUI_Panel *flagPanel = addPanelToPanel(varPanel, "Flag", 1);
-	windSpinner = addSpinnerToPanel(flagPanel, "Wind", GLUI_SPINNER_INT, &wind);
-
-	windSpinner->set_int_limits(0, 10, GLUI_LIMIT_WRAP);
 }
 
 
@@ -194,20 +235,6 @@ void GUI::processHits (GLint hits, GLuint buffer[])
 					fileToLoad = (char*)"modern.xml";
 				else
 					fileToLoad = (char*)"garden.xml";
-			}else if(selected[0] == -2){//difficulty
-				if(selected[1] == 1)
-					difficulty = (char*)"easy";
-				else if(selected[1] == 2)
-					difficulty = (char*)"medium";
-				else
-					difficulty = (char*)"hard";
-			}else if(selected[0] == -3){//type of game
-				if(selected[1] == 1)
-					modeOfGame = (char*)"pvp";
-				else if(selected[1] == 2)
-					modeOfGame = (char*)"pvc";
-				else
-					modeOfGame = (char*)"cvc";
 			}else if(selected[0] == -4){//play and exit
 				if(selected[1] == 1)
 					startGame();
@@ -218,20 +245,17 @@ void GUI::processHits (GLint hits, GLuint buffer[])
 			}
 		}else{
 			if(selected[0] >= 0 && selected[0] < 14){ //peca
-				game->processHit(selected[0]);
+				((Scene*) scene)->game->processHit(selected[0]);
 			}else
-				game->processHit(selected[0], selected[1]);
+				((Scene*) scene)->game->processHit(selected[0], selected[1]);
 		}
 	}else
 		printf("Nothing selected while picking \n");
 }
 
-
-
 void GUI::startGame(){
 	Graph * pgraph = new Graph();
 	ANFScene anf = ANFScene(fileToLoad, pgraph);
-	this->graph = pgraph;
 
 	string ambient = "";
 	if(fileToLoad == "classic.xml")
@@ -241,5 +265,12 @@ void GUI::startGame(){
 	else
 		ambient = "garden";
 
-	game = new StateOfGame(graph, difficulty, modeOfGame, ambient);
+	startPlay = true;
+
+	((Scene*)scene)->graph = pgraph;
+	((Scene*)scene)->game->ambient = ambient;
+	((Scene*)scene)->init();
+
+	initGUI();
+
 }

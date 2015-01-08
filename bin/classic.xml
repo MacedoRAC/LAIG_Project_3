@@ -34,9 +34,9 @@
     </lights>
 
     <textures>
-        <texture id="tableWood" file="img/tableWood.png" texlength_s="1.5" texlength_t="1.1" />
+        <!--<texture id="tableWood" file="img/tableWood.png" texlength_s="1.5" texlength_t="1.1" />
         <texture id="metalic" file="img/metalic.png" texlength_s="6.4" texlength_t="4.8" />
-        <texture id="estofo" file="img/estofo.png" texlength_s="5.75" texlength_t="4" />
+        <texture id="estofo" file="img/estofo.png" texlength_s="5.75" texlength_t="4" />-->
     </textures>
 
     <appearances>
@@ -46,7 +46,7 @@
             <component type="specular" value="1 1 1 1" />
         </appearance>
 
-        <appearance id="table" shininess="20" textureref="tableWood">
+        <!--<appearance id="table" shininess="20" textureref="tableWood">
             <component type="ambient" value="0.89 0.76 0 1" />
             <component type="diffuse" value="0.89 0.76 0 1" />
             <component type="specular" value="0.89 0.76 0 1" />
@@ -62,7 +62,7 @@
             <component type="ambient" value="0.2 0.8 0.3 1" />
             <component type="diffuse" value="0.2 0.8 0.3 1" />
             <component type="specular" value="0.2 0.8 0.3 1" />
-        </appearance>
+        </appearance>-->
     </appearances>
 
     <animations>
@@ -80,13 +80,13 @@
             </primitives>
 
             <descendants>
-                <noderef id="table" />
+                <!--<noderef id="table" />
                 <noderef id="chair1" />
-                <noderef id="chair2" />
+                <noderef id="chair2" />-->
             </descendants>
         </node>
 
-        <node id="table">
+        <!--<node id="table">
             <transforms>
             </transforms>
 
@@ -244,6 +244,6 @@
 
             <descendants>
             </descendants>
-        </node>
+        </node>-->
     </graph>
 </anf>

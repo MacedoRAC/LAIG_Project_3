@@ -18,7 +18,7 @@
     </lights>
 
     <textures>
-        <texture id="menuText" file="img/menu.jpg" texlength_s="6" texlength_t="5" />
+        <texture id="menuText" file="img/menu2.jpg" texlength_s="6" texlength_t="5" />
     </textures>
 
     <appearances>
@@ -55,12 +55,6 @@
                 <noderef id="classic" />
                 <noderef id="modern" />
                 <noderef id="garden" />
-                <noderef id="easy" />
-                <noderef id="medium" />
-                <noderef id="hard" />
-                <noderef id="PvP" />
-                <noderef id="PvC" />
-                <noderef id="CvC" />
                 <noderef id="play" />
                 <noderef id="exit" />
             </descendants>
@@ -116,90 +110,6 @@
 
             <primitives>
                 <rectangle xy1="1.28 2.56" xy2="2.14 3" />
-            </primitives>
-
-            <descendants>
-            </descendants>
-        </node>
-
-        <node id="easy" transparency="true">
-            <transforms>
-            </transforms>
-
-            <appearanceref id="menu_noText" />
-
-            <primitives>
-                <rectangle xy1="3.84 1.70" xy2="4.42 2" />
-            </primitives>
-
-            <descendants>
-            </descendants>
-        </node>
-
-        <node id="medium" transparency="true">
-            <transforms>
-            </transforms>
-
-            <appearanceref id="menu_noText" />
-
-            <primitives>
-                <rectangle xy1="2.56 1.70" xy2="3.42 2" />
-            </primitives>
-
-            <descendants>
-            </descendants>
-        </node>
-
-        <node id="hard" transparency="true">
-            <transforms>
-            </transforms>
-
-            <appearanceref id="menu_noText" />
-
-            <primitives>
-                <rectangle xy1="1.42 1.70" xy2="2.14 2" />
-            </primitives>
-
-            <descendants>
-            </descendants>
-        </node>
-
-        <node id="PvP" transparency="true">
-            <transforms>
-            </transforms>
-
-            <appearanceref id="menu_noText" />
-
-            <primitives>
-                <rectangle xy1="3.56 0.84" xy2="4.28 1.14" />
-            </primitives>
-
-            <descendants>
-            </descendants>
-        </node>
-
-        <node id="PvC" transparency="true">
-            <transforms>
-            </transforms>
-
-            <appearanceref id="menu_noText" />
-
-            <primitives>
-                <rectangle xy1="2.56 0.84" xy2="3.28 1.14" />
-            </primitives>
-
-            <descendants>
-            </descendants>
-        </node>
-
-        <node id="CvC" transparency="true">
-            <transforms>
-            </transforms>
-
-            <appearanceref id="menu_noText" />
-
-            <primitives>
-                <rectangle xy1="1.70 0.84" xy2="2.28 1.14" />
             </primitives>
 
             <descendants>

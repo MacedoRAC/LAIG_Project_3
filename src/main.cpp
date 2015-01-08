@@ -13,11 +13,11 @@ using namespace std;
 int main(int argc, char* argv[]) {
 	Graph * pgraph = new Graph();
 
-	char* filename = "classic.xml";
+	char* filename = "menu.xml";
 	if (argc >1)
 		filename = argv[1];
 	CGFapplication app = CGFapplication();
-	Scene * scene = new Scene();
+	Scene * scene = new Scene("classic");
 	try {
 		app.init(&argc, argv);
 		ANFScene n = ANFScene(filename,pgraph);
